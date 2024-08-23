@@ -15,7 +15,8 @@ uses
   System.SysUtils,
   System.Classes,
   uPluginMainMenu in 'uPluginMainMenu.pas',
-  uCommons in 'uCommons.pas';
+  Utils.uCommons in 'Utils.uCommons.pas',
+  View.DatasetViewer in 'View.DatasetViewer.pas' {fDatasetViewer};
 
 {$R *.res}
 

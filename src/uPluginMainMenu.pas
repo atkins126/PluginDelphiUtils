@@ -3,7 +3,7 @@ unit uPluginMainMenu;
 interface
 
 uses
-  ToolsAPI, ShellAPI, WinApi.Windows, VCL.Menus, System.SysUtils, Vcl.Dialogs;
+  ToolsAPI, ShellAPI, WinApi.Windows, VCL.Menus, System.SysUtils, Vcl.Dialogs, Vcl.Forms;
 
 type
   TPluginMainMenu = class(TInterfacedObject, IOTAWizard, IOTAMenuWizard, IOTAThreadNotifier)
@@ -38,7 +38,7 @@ function LoadPlugin(BorlandIDEServices: IBorlandIDEServices; RegisterProc: TWiza
 implementation
 
 uses
-  uCommons;
+  Utils.uCommons, View.DatasetViewer;
 
 function LoadPlugin(BorlandIDEServices: IBorlandIDEServices; RegisterProc: TWizardRegisterProc; var Terminate: TWizardTerminateProc): boolean; stdcall;
 begin
@@ -131,7 +131,6 @@ end;
 
 procedure TPluginMainMenu.ExecutarDatasetViewer(Sender: TObject);
 var
-  pathDatasetViewer: string;
   psthData: string;
   selectDataset: string;
   command: string;
@@ -147,10 +146,10 @@ var
   resultAddr: UInt64;
   resultSize: Cardinal;
   resultVal: Cardinal;
-begin
-  pathDatasetViewer := uCommons.GetDLLPath + '\DatasetViewer';
 
-  psthData := pathDatasetViewer + '\data.xml';
+  oForm: TfDatasetViewer;
+begin
+  psthData := Utils.uCommons.GetDLLPath + '\data.xml';
 
   topView := (BorlandIDEServices as IOTAEditorServices).TopView;
 
@@ -197,7 +196,11 @@ begin
   end;
 
   if not (evaluateResult in [erError, erBusy]) then
-    ShellExecute(0, 'open', PChar(pathDatasetViewer + '\DatasetViewer.exe ' + psthData), nil, nil, SW_SHOWNORMAL);
+  begin
+    //oForm := TfDatasetViewer.Create(nil);
+    //oForm.ShowModal;
+    //ShellExecute(0, 'open', PChar(pathDatasetViewer + '\DatasetViewer.exe ' + psthData), nil, nil, SW_SHOWNORMAL);
+  end;
 end;
 
 end.

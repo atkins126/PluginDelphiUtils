@@ -2,7 +2,7 @@
     <PropertyGroup>
         <ProjectGuid>{DF489C12-826B-463D-B9B1-05B995CC74AE}</ProjectGuid>
         <ProjectVersion>18.3</ProjectVersion>
-        <FrameworkType>None</FrameworkType>
+        <FrameworkType>VCL</FrameworkType>
         <MainSource>PluginDelphiUtils.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
@@ -65,7 +65,7 @@
         <DCC_K>false</DCC_K>
         <GenDll>true</GenDll>
         <DCC_UsePackage>RESTBackendComponents;soaprtl;soapmidas;RESTComponents;DataSnapFireDAC;FireDACIBDriver;emsclient;FireDACCommon;soapserver;FireDACCommonDriver;inet;FireDAC;FireDACSqliteDriver;$(DCC_UsePackage)</DCC_UsePackage>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>PluginDelphiUtils</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Linux64)'!=''">
@@ -113,7 +113,11 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uPluginMainMenu.pas"/>
-        <DCCReference Include="uCommons.pas"/>
+        <DCCReference Include="Utils.uCommons.pas"/>
+        <DCCReference Include="View.DatasetViewer.pas">
+            <Form>fDatasetViewer</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -134,13 +138,15 @@
                 <Source>
                     <Source Name="MainSource">PluginDelphiUtils.dpr</Source>
                 </Source>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="c:\UNJ\RTC\PG5_DEV_576920\pg5Dev\SRC\3RD_PARTY\INTDEV\SRC\WIN32\DEBUG\INT.bpl">Softplan SAJ - Módulo INT</Excluded_Packages>
-                    <Excluded_Packages Name="c:\UNJ\RTC\PG5_DEV_576920\pg5Dev\SRC\3RD_PARTY\ISJDEV\SRC\WIN32\DEBUG\ISJ.bpl">Softplan SAJ - Módulo ISJ</Excluded_Packages>
-                    <Excluded_Packages Name="c:\UNJ\RTC\PG5_DEV_576920\pg5Dev\src\3rd_party\intWSDev\src\Win32\Debug\INTWS.bpl">Softplan SAJ - Módulo INTWS</Excluded_Packages>
-                </Excluded_Packages>
+                <Excluded_Packages/>
             </Delphi.Personality>
             <Deployment Version="3">
+                <DeployFile LocalName="..\bin\Win32\Debug\PluginDelphiUtils.dll" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>PluginDelphiUtils.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -158,12 +164,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\bin\Win32\Debug\PluginDelphiUtils.dll" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>PluginDelphiUtils.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
