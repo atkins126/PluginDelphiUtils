@@ -1,0 +1,4 @@
+src/*.~dsk
+src/Win32/Debug/*.dcu
+src/Win32/Release/*.dcu
+src/__history
